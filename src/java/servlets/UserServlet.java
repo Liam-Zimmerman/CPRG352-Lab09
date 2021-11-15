@@ -44,8 +44,7 @@ public class UserServlet extends HttpServlet {
             
             try {
                 char ch = '+';
-                String email = request.getParameter("email");
-                email = email.replace(' ',ch);
+                String email = request.getParameter("userEmail");
                 us.delete(email);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,8 +100,9 @@ public class UserServlet extends HttpServlet {
                     String editFname = request.getParameter("editFname");
                     String editLname = request.getParameter("editLname");
                     String editPassword = request.getParameter("editPassword");
-                    int editRole = Integer.parseInt(request.getParameter("editRole"));
-                    if(editEmail.length() > 0 && editFname.length() > 0 && editLname.length() > 0 && editPassword.length() > 0 && editRole > 0){
+                    int editRoleId = Integer.parseInt(request.getParameter("editRole"));
+                    if(editEmail.length() > 0 && editFname.length() > 0 && editLname.length() > 0 && editPassword.length() > 0 && editRoleId > 0){
+                    Role editRole = rs.get(editRoleId);
                     us.update(editEmail, true, editFname, editLname, editPassword, editRole);
                     }
                     break;     

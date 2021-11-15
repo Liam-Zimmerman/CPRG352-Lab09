@@ -61,14 +61,20 @@
                                     <input type="checkbox" disabled checked>
                                 </td>
                             </c:if>
-                            <c:if test="${user.active != false}">
-                                <td>
-                                    <input type="checkbox" disabled>
-                                </td>
-                            </c:if>
+                            <td> <input type="radio" name="editUser"</td>
+                            
+                        <form action="user">
+                            <td>
+                                <input type="hidden" name="userEmail" value="${user.email}">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="submit" value="Delete">
+                            </td>
+                        </form>
+                        
                             <td><a href="user?action=view&amp;email=${user.email}"><i class="fas fa-user-edit"></i></a><br></td>
                             <td>
                                 <a href="user?action=delete&amp;email=${user.email}"><i class="fas fa-user-times"></i></a><br></td>
+                          
                         </tr>
                     </c:forEach>
                 </table>

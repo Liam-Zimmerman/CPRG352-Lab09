@@ -52,11 +52,34 @@ public class UserDB {
     }
 
     public void update(User user) throws Exception {
+       EntityManager em = DBUtil.getEmFactory().createEntityManager();
+       EntityTransaction trans = em.getTransaction();
        
+       try {
+           trans.begin();
+           em.merge(user);
+           trans.commit();
+       } catch (Exception ex) {
+           trans.rollback();
+       } finally {
+           em.close();
+       }
     }
 
     public void delete(User user) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
         
+        try {
+            trans.begin();
+            em.remove(em.merge(user));
+            em.merge(user);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
     }
     
 }
